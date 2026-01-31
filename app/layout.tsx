@@ -19,8 +19,8 @@ export const metadata: Metadata = {
 };
 
 
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+// import Navbar from "./components/Navbar";
+// import Footer from "./components/Footer";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import {
   ClerkProvider,
@@ -46,11 +46,7 @@ export default function RootLayout({
         <ClerkProvider>
           <ConvexClientProvider>
             <Provider>
-              <Navbar />
-              <main className="flex-grow">
-                {children}
-              </main>
-              <Footer />
+              {children}
             </Provider>
           </ConvexClientProvider>
         </ClerkProvider>
