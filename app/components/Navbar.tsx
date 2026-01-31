@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -47,13 +48,8 @@ export default function Navbar() {
                     <Link href="/login" className="hidden sm:block text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">
                         Sign In
                     </Link>
-                    <Link
-                        href="/get-started"
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-lg hover:shadow-blue-500/25 active:scale-95"
-                    >
-                        Get Started
-                    </Link>
                 </div>
+
             </div>
         </nav>
     );
