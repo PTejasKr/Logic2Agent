@@ -3,6 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+
 import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
@@ -44,11 +46,29 @@ export default function Navbar() {
 
 
 
+
                 <div className="flex items-center space-x-4">
-                    <Link href="/login" className="hidden sm:block text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">
-                        Sign In
-                    </Link>
+                    <SignedOut>
+                        <Link href="/sign-in" className="hidden sm:block text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">
+                            Sign In
+                        </Link>
+
+                    </SignedOut>
+                    <SignedIn>
+                        <Link href="/dashboard" className="hidden sm:block text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors">
+                            Dashboard
+                        </Link>
+                        <UserButton
+                            afterSignOutUrl="/"
+                            appearance={{
+                                elements: {
+                                    avatarBox: "w-10 h-10"
+                                }
+                            }}
+                        />
+                    </SignedIn>
                 </div>
+
 
             </div>
         </nav>

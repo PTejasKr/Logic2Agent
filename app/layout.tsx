@@ -22,6 +22,16 @@ export const metadata: Metadata = {
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { ConvexClientProvider } from "./ConvexClientProvider";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs';
+import Provider from "./provider";
+
 
 export default function RootLayout({
   children,
@@ -33,13 +43,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white selection:bg-blue-500/30 min-h-screen flex flex-col`}
       >
-        <ConvexClientProvider>
-          <Navbar />
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Footer />
-        </ConvexClientProvider>
+        <ClerkProvider>
+          <ConvexClientProvider>
+            <Provider>
+              <Navbar />
+              <main className="flex-grow">
+                {children}
+              </main>
+              <Footer />
+            </Provider>
+          </ConvexClientProvider>
+        </ClerkProvider>
       </body>
     </html>
 

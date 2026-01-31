@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import { SignedIn, SignedOut } from '@clerk/nextjs';
+
 
 export default function Home() {
   return (
@@ -11,13 +13,15 @@ export default function Home() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 sm:px-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 min-h-[90vh]">
         <div className="flex-1 space-y-10 text-center lg:text-left">
-          <div className="inline-flex items-center space-x-2 px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-green-600 dark:text-green-400 text-sm font-medium animate-fade-in">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-            </span>
-            <span>Logic2Agent 1.0 is here</span>
-          </div>
+          <Link href="/">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-green-600 dark:text-green-400 text-sm font-medium animate-fade-in">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              <span>Logic2Agent 1.0 is here</span>
+            </div>
+          </Link>
 
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1]">
             Next-Gen <span className="text-green-600 italic">Agent Logic</span> Mastery
@@ -29,16 +33,26 @@ export default function Home() {
 
 
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-            <Link
-              href="/dashboard"
-              className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl text-lg font-semibold transition-all shadow-[0_20px_50px_rgba(37,_99,_235,_0.3)] hover:shadow-blue-500/40 active:scale-95 text-center"
-            >
-              Get Started Free
-            </Link>
-            <button className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl text-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all active:scale-95">
-              Watch the Demo
-            </button>
+            <SignedOut>
+
+              <Link
+                href="/sign-up"
+                className="w-full sm:w-auto px-8 py-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl text-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all active:scale-95"
+              >
+                Get Started Free
+              </Link>
+            </SignedOut>
+            <SignedIn>
+              <Link
+                href="/dashboard"
+                className="w-full sm:w-auto px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-2xl text-lg font-semibold transition-all shadow-[0_20px_50px_rgba(34,_197,_94,_0.3)] hover:shadow-green-500/40 active:scale-95 text-center"
+              >
+                Go to Dashboard
+              </Link>
+            </SignedIn>
+
           </div>
+
 
           <div className="flex items-center justify-center lg:justify-start space-x-8 pt-4">
             <div className="text-center">
