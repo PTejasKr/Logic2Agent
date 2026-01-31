@@ -5,9 +5,7 @@ import React from 'react'
 function DashboardProvider({ children }: { children: React.ReactNode }) {
     return (
         <SidebarProvider>
-            <div className="w-full">
-                {children}
-            </div>
+            {children}
         </SidebarProvider>
     )
 }

@@ -48,25 +48,24 @@ export function AppSidebar() {
     return (
         <Sidebar>
             <SidebarHeader>
-                <div className="flex items-center gap-2 px-2">
-                    {/* Replace with actual logo path if available or placeholder */}
-                    <div className="bg-blue-600 p-1 rounded-md">
-                        <Home className="text-white h-5 w-5" />
+                <div className="flex items-center gap-4 p-4">
+                    <div className="bg-blue-600 p-3 rounded-xl">
+                        <Home className="text-white h-7 w-7" />
                     </div>
-                    <span className="font-bold text-xl">Logic2Agent</span>
+                    <span className={`font-bold ${open ? 'text-2xl' : 'hidden'} transition-all duration-200 ease-in-out`}>Logic2Agent</span>
                 </div>
             </SidebarHeader>
-            <SidebarContent>
+            <SidebarContent className="mt-6">
                 <SidebarGroup>
-                    <SidebarGroupLabel>Application</SidebarGroupLabel>
-                    <SidebarGroupContent>
+                    <SidebarGroupLabel className={`${open ? 'text-2xl' : 'hidden'} py-4 transition-all duration-200 ease-in-out font-bold`}>Application</SidebarGroupLabel>
+                    <SidebarGroupContent className="mt-3">
                         <SidebarMenu>
                             {MenuOptions.map((menu, index) => (
-                                <SidebarMenuItem key={index}>
-                                    <SidebarMenuButton asChild>
+                                <SidebarMenuItem key={index} className="mb-3">
+                                    <SidebarMenuButton asChild className="py-5 px-4 rounded-xl h-14">
                                         <a href={menu.url}>
-                                            <menu.icon />
-                                            <span>{menu.title}</span>
+                                            <menu.icon className="h-7 w-7" />
+                                            <span className={`${open ? 'text-xl' : 'hidden'} font-semibold transition-all duration-200 ease-in-out`}>{menu.title}</span>
                                         </a>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
@@ -75,12 +74,14 @@ export function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
-            <SidebarFooter className="mb-10">
-                <div className="flex gap-2 items-center">
-                    <Gem />
-                    {open && <h2>Remaining Credits: <span className="font-bold">{userDetail?.token}</span></h2>}
+            <SidebarFooter className="mb-8">
+                <div className="flex flex-col gap-5">
+                    <div className="flex items-center gap-3">
+                        <Gem className="h-6 w-6" />
+                        {open && <h2 className="text-lg">Remaining Credits: <span className="font-bold">{userDetail?.token}</span></h2>}
+                    </div>
+                    {open && <Button className="w-full mt-4 py-6 text-lg rounded-lg">Upgrade to Unlimited</Button>}
                 </div>
-                {open && <Button className="w-full mt-3">Upgrade to Unlimited</Button>}
             </SidebarFooter>
         </Sidebar>
     )
