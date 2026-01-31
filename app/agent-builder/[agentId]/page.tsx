@@ -210,7 +210,7 @@ function AgentBuilderContent() {
                             <p className="text-gray-500 font-medium">Loading workspace...</p>
                         </div>
                     )}
-                    <SettingPannel selectedNode={selectedNode} setNodes={setNodes} />
+                    <SettingPannel selectedNode={selectedNode} setNodes={setNodes} onSave={SaveNodesAndEdges} />
                 </div>
             </div>
         </div >

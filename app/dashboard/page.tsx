@@ -6,7 +6,7 @@ function Dashboard() {
     return (
         <div className="flex flex-col items-center justify-center w-full mt-0 p-4">
             <CreateAgentSection />
-            <div className="w-full">
+            <div className="w-full relative overflow-hidden">
                 <AiAgentTab />
 
 

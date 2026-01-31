@@ -8,9 +8,10 @@ import { toast } from 'sonner';
 interface SettingPannelProps {
     selectedNode: any;
     setNodes: any;
+    onSave: () => void;
 }
 
-function SettingPannel({ selectedNode, setNodes }: SettingPannelProps) {
+function SettingPannel({ selectedNode, setNodes, onSave }: SettingPannelProps) {
     const [inputs, setInputs] = useState<any>({});
 
     useEffect(() => {
@@ -207,6 +208,8 @@ function SettingPannel({ selectedNode, setNodes }: SettingPannelProps) {
                             console.log("Full Saved Data:", saveData);
 
                             toast.success("Settings saved ");
+                            // Trigger Database Save
+                            onSave();
                         }}
                         className='w-full bg-black text-white hover:bg-gray-800 p-3 rounded-xl font-medium transition-colors'
                     >

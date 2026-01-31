@@ -1,3 +1,4 @@
+"use client";
 import React, { useContext, useEffect, useState } from 'react'
 import { GitBranch, Trash2 } from 'lucide-react'
 import { UserDetailContext } from '@/context/UserDetailContext';

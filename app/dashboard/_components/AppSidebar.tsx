@@ -12,6 +12,7 @@ import {
     SidebarMenuItem,
     useSidebar,
 } from "@/components/ui/sidebar"
+import Link from "next/link"
 import Image from "next/image"
 import { LayoutDashboard, Headphones, Database, WalletCards, Home, Gem } from "lucide-react"
 import { useContext } from "react"
@@ -43,20 +44,20 @@ const MenuOptions = [
 
 export function AppSidebar() {
     const { userDetail } = useContext(UserDetailContext);
-    const { open } = useSidebar();
+    const { open, isMobile } = useSidebar();
 
     return (
-        <Sidebar className="border-r border-white/5 bg-black/70 backdrop-blur-md">
+        <Sidebar collapsible={isMobile ? "offcanvas" : "none"} className="border-r border-white/5 bg-black/70 backdrop-blur-md md:h-svh md:sticky md:top-0">
             <SidebarHeader>
-                <div className="flex items-center gap-4 p-5">
-                    <div className="bg-primary/10 border border-primary/20 p-2.5 rounded-xl shadow-[0_0_15px_rgba(6,182,212,0.1)]">
-                        <Home className="text-primary h-6 w-6" />
+                <Link href="/" className="flex items-center gap-4 p-5 group cursor-pointer hover:opacity-80 transition-opacity">
+                    <div className="bg-primary/10 border border-primary/20 p-2.5 rounded-xl shadow-[0_0_15px_rgba(6,182,212,0.1)] group-hover:shadow-[0_0_20px_rgba(6,182,212,0.2)] transition-shadow">
+                        <Home className="text-primary h-6 w-6 group-hover:scale-110 transition-transform" />
                     </div>
-                    <span className={`font-black tracking-tight ${open ? 'text-2xl' : 'hidden'} transition-all duration-200 ease-in-out cursor-default`}>
+                    <span className={`font-black tracking-tight ${open ? 'text-2xl' : 'hidden'} transition-all duration-200 ease-in-out`}>
                         <span className="text-blue-500">Dashboard</span>
 
                     </span>
-                </div>
+                </Link>
             </SidebarHeader>
             <SidebarContent className="mt-4 px-2">
                 <SidebarGroup>
