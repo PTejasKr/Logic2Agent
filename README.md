@@ -1,6 +1,6 @@
-# NeuralFlow
+# Logic2Agent
 
-NeuralFlow is an advanced AI agent builder platform that enables users to create intelligent, autonomous agents without writing code. Our platform combines cutting-edge neural networks with an intuitive visual interface to democratize AI development.
+Logic2Agent is an advanced AI agent builder platform that enables users to create intelligent, autonomous agents without writing code. Our platform combines cutting-edge neural networks with an intuitive visual interface to democratize AI development.
 
 ## Getting Started
 
