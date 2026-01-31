@@ -74,7 +74,7 @@ export function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
-            <SidebarFooter className="mb-8">
+            <SidebarFooter className="mb-8 mt-auto">
                 <div className="flex flex-col gap-5">
                     <div className="flex items-center gap-3">
                         <Gem className="h-6 w-6" />

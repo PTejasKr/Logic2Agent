@@ -10,13 +10,16 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
         <DashboardProvider>
             <div className="flex min-h-screen w-full">
                 <AppSidebar />
-                <SidebarInset>
-                    <AppHeader />
-                    <main className="p-0">
-                        {children}
-                    </main>
-                    <AppFooter />
-                </SidebarInset>
+                <main className="w-full flex flex-col relative overflow-hidden">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent blur-3xl" />
+                    <SidebarInset>
+                        <AppHeader />
+                        <main className="p-0">
+                            {children}
+                        </main>
+                        <AppFooter />
+                    </SidebarInset>
+                </main>
             </div>
         </DashboardProvider>
     )

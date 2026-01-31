@@ -13,22 +13,17 @@ export default function Home() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-6 sm:px-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 min-h-[90vh]">
         <div className="flex-1 space-y-10 text-center lg:text-left">
-          <Link href="/">
-            <div className="inline-flex items-center space-x-2 px-3 py-1 bg-green-500/10 border border-green-500/20 rounded-full text-green-600 dark:text-green-400 text-sm font-medium animate-fade-in">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-              </span>
-              <span>Logic2Agent 1.0 is here</span>
-            </div>
-          </Link>
+          <div className="text-center lg:text-left">
+            <h1 className="text-6xl md:text-8xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500">
+              Logic2Agent
+            </h1>
+            <p className="text-2xl md:text-3xl font-semibold mt-4 text-gray-700 dark:text-gray-300 max-w-3xl mx-auto lg:mx-0">
+              Compile human logic into multi-agent AI systems.
+            </p>
+          </div>
 
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1]">
-            Next-Gen <span className="text-green-600 italic">Agent Logic</span> Mastery
-          </h1>
-
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light">
-            Architect sophisticated logic-driven agents that breathe life into your data. Logic2Agent isn't just a tool; it's the bridge between raw intelligence and autonomous execution.
+          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto lg:mx-0 leading-relaxed">
+            Logic2Agent is a visual reasoning compiler that converts drag-and-drop logic flows into multi-agent AI behaviors, deployable instantly as a web chatbot.
           </p>
 
 
