@@ -15,48 +15,104 @@ The current landscape presents several challenges:
 
 Logic2Agent addresses these challenges by providing a no-code solution that empowers anyone to build sophisticated AI agents through an intuitive visual interface.
 
-## Architecture Diagram
+## System Architecture Diagram
 
 ```
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                              LOGIC2AGENT PLATFORM                           │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐         │
-│  │   FRONTEND      │    │   BACKEND       │    │   DATABASE      │         │
-│  │                 │    │                 │    │                 │         │
-│  │  • Next.js      │    │  • Convex       │    │  • Convex DB    │         │
-│  │  • React Flow   │    │  • TypeScript   │    │  • User Schema  │         │
-│  │  • Tailwind CSS │    │  • Next.js API  │    │  • Agent Schema │         │
-│  │  • TypeScript   │    │                 │    │                 │         │
-│  └─────────────────┘    └─────────────────┘    └─────────────────┘         │
-│              │                   │                      │                   │
-│              │ HTTP/HTTPS        │ Convex Functions     │ Data Storage      │
-│              ├──────────────────►│─────────────────────►│                   │
-│              │                   │                      │                   │
-│              │                   │                      │                   │
-│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐         │
-│  │ AUTHENTICATION  │    │   SECURITY      │    │  AI SERVICES    │         │
-│  │                 │    │                 │    │                 │         │
-│  │  • Clerk        │    │  • Arcjet       │    │  • OpenAI API   │         │
-│  │  • OAuth        │    │  • Rate Limit   │    │  • LangChain    │         │
-│  │  • JWT Tokens   │    │  • DDOS Prot.   │    │  • Vector DB    │         │
-│  └─────────────────┘    └─────────────────┘    └─────────────────┘         │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                    LOGIC2AGENT PLATFORM                                       │
+├─────────────────────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                                 │
+│  ┌───────────────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                                   CLIENT LAYER                                            │ │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────────────┐ │ │
+│  │  │   BROWSER       │  │   NEXT.JS       │  │   REACT FLOW    │  │   UI COMPONENTS        │ │ │
+│  │  │                 │  │                 │  │                 │  │                        │ │ │
+│  │  │ • Chrome        │  │ • App Router    │  │ • Visual Editor │  │ • Shadcn UI          │ │ │
+│  │  │ • Firefox       │  │ • SSR/CSR       │  │ • Node System   │  │ • Radix UI           │ │ │
+│  │  │ • Safari        │  │ • Layouts       │  │ • Edge System   │  │ • Lucide Icons       │ │ │
+│  │  │                 │  │ • Pages         │  │ • Canvas        │  │ • Tailwind CSS       │ │ │
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘  └────────────────────────┘ │ │
+│  └───────────────────────────────────────────────────────────────────────────────────────────┘ │
+│                            │                     │                     │                       │
+│                            ▼                     ▼                     ▼                       │
+│  ┌───────────────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                                  FRONTEND APPLICATION                                     │ │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────────────┐ │ │
+│  │  │   HOME PAGE     │  │ AGENT BUILDER   │  │   DASHBOARD     │  │   AUTH PAGES         │ │ │
+│  │  │                 │  │                 │  │                 │  │                        │ │ │
+│  │  │ • Landing Page  │  │ • Visual Editor │  │ • Agent List    │  │ • Sign In/Up         │ │ │
+│  │  │ • Hero Section  │  │ • Node Creation │  │ • Create Agent  │  │ • User Profile       │ │ │
+│  │  │ • Stats Display │  │ • Flow Control  │  │ • Manage Agents │  │ • Protected Routes   │ │ │
+│  │  │ • Call to Action│  │ • Save/Load     │  │ • Analytics     │  │                        │ │ │
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘  └────────────────────────┘ │ │
+│  └───────────────────────────────────────────────────────────────────────────────────────────┘ │
+│                            │                     │                     │                       │
+│                            ▼                     ▼                     ▼                       │
+│  ┌───────────────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                                MIDDLEWARE LAYER                                           │ │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────────────┐ │ │
+│  │  │   CLERK         │  │   ARCJET        │  │   NEXTJS        │  │   SECURITY             │ │ │
+│  │  │   AUTH          │  │   SECURITY      │  │   MIDDLEWARE    │  │   PROTECTION           │ │ │
+│  │  │ • OAuth         │  │ • Rate Limiting │  │ • Route Matching│  │ • DDOS Protection      │ │ │
+│  │  │ • JWT Tokens    │  │ • Bot Detection │  │ • Auth Guard    │  │ • IP Filtering         │ │ │
+│  │  │ • User Session  │  │ • Threat Mit.   │  │ • Public Routes │  │ • Request Validation   │ │ │
+│  │  │ • User Profiles │  │ • Analytics     │  │ • Private Routes│  │ • Input Sanitization   │ │ │
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘  └────────────────────────┘ │ │
+│  └───────────────────────────────────────────────────────────────────────────────────────────┘ │
+│                            │                     │                     │                       │
+│                            ▼                     ▼                     ▼                       │
+│  ┌───────────────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                                 BACKEND LAYER                                             │ │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────────────┐ │ │
+│  │  │   CONVEX        │  │   API ROUTES    │  │   AGENT         │  │   USER MANAGEMENT      │ │ │
+│  │  │   FUNCTIONS     │  │                 │  │   SERVICES      │  │                        │ │ │
+│  │  │ • Database Ops  │  │ • REST API      │  │ • Create Agent  │  │ • Create User         │ │ │
+│  │  │ • Real-time Sync│  │ • CRUD Ops      │  │ • Get Agent List│  │ • Update Profile      │ │ │
+│  │  │ • Query/Mutation│  │ • Auth Headers  │  │ • Publish Agent │  │ • Subscription Mgmt   │ │ │
+│  │  │ • File Storage  │  │ • Validation    │  │ • Config Save   │  │ • Token Management   │ │ │
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘  └────────────────────────┘ │ │
+│  └───────────────────────────────────────────────────────────────────────────────────────────┘ │
+│                            │                     │                     │                       │
+│                            ▼                     ▼                     ▼                       │
+│  ┌───────────────────────────────────────────────────────────────────────────────────────────┐ │
+│  │                               DATA LAYER                                                  │ │
+│  │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  ┌────────────────────────┐ │ │
+│  │  │   CONVEX        │  │   AGENT         │  │   USER          │  │   CONFIGURATION        │ │ │
+│  │  │   DATABASE      │  │   TABLE         │  │   TABLE         │  │   STORAGE              │ │ │
+│  │  │ • Document DB   │  │ • agentId       │  │ • userId        │  │ • Node Configs         │ │ │
+│  │  │ • Real-time     │  │ • name          │  │ • name          │  │ • Flow Definitions     │ │ │
+│  │  │ • ACID Trans.   │  │ • config        │  │ • email         │  │ • Agent Settings       │ │ │
+│  │  │ • Indexing      │  │ • published     │  │ • subscription  │  │ • Connection Data      │ │ │
+│  │  │ • Backup/Recovery│ │ • userId(fk)    │  │ • token         │  │ • Custom Properties    │ │ │
+│  │  └─────────────────┘  └─────────────────┘  └─────────────────┘  └────────────────────────┘ │ │
+│  └───────────────────────────────────────────────────────────────────────────────────────────┘ │
+│                                                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────────────────────┘
 
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                          USER WORKFLOW                                      │
-├─────────────────────────────────────────────────────────────────────────────┤
-│                                                                             │
-│  User → Browser → Frontend → API → Convex → Database                       │
-│                                                                             │
-│  1. User creates account/log in                                              │
-│  2. User designs agent workflow using visual editor                        │
-│  3. Configuration saved to database                                        │
-│  4. Agent deployed and executed                                            │
-│                                                                             │
-└─────────────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                EXTERNAL INTEGRATIONS                                          │
+├─────────────────────────────────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────────────────┐ │
+│  │   OPENAI        │  │   LANGCHAIN     │  │   VECTOR DB     │  │   THIRD-PARTY APIS        │ │
+│  │   API           │  │   FRAMEWORK     │  │   SERVICES      │  │   (optional)              │ │
+│  │ • GPT Models    │  │ • LLM Orchestration││ • Semantic Search││ • External Tools          │ │
+│  │ • Embeddings    │  │ • Prompt Mgmt   │  │ • Memory Store  │  │ • Data Sources            │ │
+│  │ • Reasoning     │  │ • Chain Building│  │ • Similarity    │  │ • Payment Processors      │ │
+│  │ • Completions   │  │ • Agent Tools   │  │ • Indexing      │  │ • Notification Services   │ │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘  └─────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                    USER WORKFLOW                                              │
+├─────────────────────────────────────────────────────────────────────────────────────────────────┤
+│  1. User visits website → Browser loads Next.js application                                   │
+│  2. User authenticates via Clerk → JWT token issued                                           │
+│  3. User accesses agent builder → React Flow canvas initialized                               │
+│  4. User creates agent workflow → Node/edge data stored in Convex                             │
+│  5. Agent configuration saved → Configuration persisted in database                           │
+│  6. Agent executed → Convex functions process workflow logic                                  │
+│  7. Results displayed → Real-time updates via Convex reactive queries                         │
+└─────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ## Tech Stack
