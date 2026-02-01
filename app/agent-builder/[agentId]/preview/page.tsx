@@ -386,10 +386,10 @@ function PreviewAgent() {
                             >
                                 <div
                                     className={`max-w-[85%] p-3 rounded-2xl text-sm shadow-sm ${msg.role === 'user'
-                                            ? 'bg-black text-white rounded-tr-none'
-                                            : msg.role === 'system'
-                                                ? 'bg-red-50 text-red-600 border border-red-100 italic'
-                                                : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-tl-none'
+                                        ? 'bg-black text-white rounded-tr-none'
+                                        : msg.role === 'system'
+                                            ? 'bg-red-50 text-red-600 border border-red-100 italic'
+                                            : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-tl-none'
                                         }`}
                                 >
                                     {msg.content}
