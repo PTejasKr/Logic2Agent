@@ -54,14 +54,26 @@ export default function RootLayout({
         />
         <div className="grainy-overlay" />
         <div className="relative z-10 flex flex-col min-h-screen">
-          <ClerkProvider>
-            <ConvexClientProvider>
-              <Provider>
-                {children}
-                <Toaster richColors />
-              </Provider>
-            </ConvexClientProvider>
-          </ClerkProvider>
+          {
+            (typeof process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY === 'string' && process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.startsWith('pk_')) ? (
+              <ClerkProvider>
+                <ConvexClientProvider>
+                  <Provider>
+                    {children}
+                    <Toaster richColors />
+                  </Provider>
+                </ConvexClientProvider>
+              </ClerkProvider>
+            ) : (
+              // Clerk not configured: render app without Clerk to allow builds and local dev without keys
+              <ConvexClientProvider>
+                <Provider>
+                  {children}
+                  <Toaster richColors />
+                </Provider>
+              </ConvexClientProvider>
+            )
+          }
         </div>
       </body>
     </html>
