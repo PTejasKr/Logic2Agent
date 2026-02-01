@@ -273,11 +273,11 @@ function SettingPannel({ selectedNode, setNodes, onSave, agentName }: SettingPan
                                 <label className='text-sm font-semibold text-gray-700 dark:text-gray-300'>Model</label>
                                 <select
                                     className='w-full p-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm appearance-none'
-                                    value={inputs.model || 'gpt-4'}
+                                    value={inputs.model || 'llama-3.3-70b-versatile'}
                                     onChange={(e) => handleInputChange('model', e.target.value)}>
-                                    <option value="gemini-flash-1.5">Gemini Flash 1.5</option>
-                                    <option value="gemini-pro-1.5">Gemini Pro 1.5</option>
-                                    <option value="gemini-pro-2.0">Gemini Pro 2.0</option>
+                                    <option value="llama-3.3-70b-versatile">Llama 3.3 70B (Restored)</option>
+                                    <option value="llama-3.1-8b-instant">Llama 3.1 8B</option>
+                                    <option value="mixtral-8x7b-32768">Mixtral 8x7B</option>
                                 </select>
                             </div>
 
@@ -341,7 +341,7 @@ function SettingPannel({ selectedNode, setNodes, onSave, agentName }: SettingPan
                                 name: inputs.name,
                                 instructions: inputs.instructions,
                                 includeChatHistory: inputs.includeChatHistory,
-                                model: inputs.model || 'gpt-4',
+                                model: inputs.model || 'llama-3.3-70b-versatile',
                                 outputFormat: inputs.outputFormat || 'text',
                                 jsonSchema: inputs.jsonSchema,
                                 ...inputs // include any other dynamic keys
