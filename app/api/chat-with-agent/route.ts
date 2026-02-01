@@ -96,6 +96,7 @@ async function handleGroqChat(messages: any[], toolConfig: any) {
     3. **NO REASONING LEAKS**: NEVER include <think>, empty tags, or internal monologues.
     4. **COMMON SENSE**: Assume the most famous location (e.g., Delhi, India) for ambiguous names.
     5. **ONE SENTENCE**: Keep most answers to a single, high-impact sentence.
+    6. **STRICT DOMAIN**: ONLY answer questions related to your specific purpose (${toolConfig.systemPrompt}). If the user asks about unrelated topics (trivia, world leaders, currency, general knowledge), politely decline and state your specific expertise.
     
     ### WORKFLOW CONTEXT:
     ${JSON.stringify(toolConfig.agents, null, 2)}
@@ -232,6 +233,7 @@ async function handleOpenAiChat(messages: any[], toolConfig: any) {
     3. **NO REASONING LEAKS**: NEVER include <think>, empty tags, or internal monologues.
     4. **COMMON SENSE**: Assume the most famous location (e.g., Delhi, India) for ambiguous names.
     5. **ONE SENTENCE**: Keep most answers to a single, high-impact sentence.
+    6. **STRICT DOMAIN**: ONLY answer questions related to your specific purpose (${toolConfig.systemPrompt}). If the user asks about unrelated topics (trivia, world leaders, currency, general knowledge), politely decline and state your specific expertise.
     
     ### WORKFLOW CONTEXT:
     ${JSON.stringify(toolConfig.agents, null, 2)}
