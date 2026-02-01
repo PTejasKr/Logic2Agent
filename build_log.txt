@@ -1,0 +1,28 @@
+
+> logic2agent@0.1.0 build
+> next build
+
+ ΓÜá Invalid next.config.ts options detected: 
+ ΓÜá     Unrecognized key(s) in object: 'reactCompiler'
+ ΓÜá See more info here: https://nextjs.org/docs/messages/invalid-next-config
+   Γû▓ Next.js 15.1.6
+
+   Creating an optimized production build ...
+ Γ£ô Compiled successfully
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/11) ...
+Error occurred prerendering page "/_not-found". Read more: https://nextjs.org/docs/messages/prerender-error
+Error: @clerk/clerk-react: Missing publishableKey. You can get your key at https://dashboard.clerk.com/last-active?path=api-keys.
+    at Object.throwMissingPublishableKeyError (C:\Users\punya\Desktop\Logic2Agent\.next\server\chunks\524.js:43:1483)
+    at C:\Users\punya\Desktop\Logic2Agent\.next\server\chunks\524.js:32:54521
+    at nO (C:\Users\punya\Desktop\Logic2Agent\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:20:45959)
+    at nI (C:\Users\punya\Desktop\Logic2Agent\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:20:47734)
+    at nL (C:\Users\punya\Desktop\Logic2Agent\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:20:65533)
+    at nN (C:\Users\punya\Desktop\Logic2Agent\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:20:63164)
+    at n$ (C:\Users\punya\Desktop\Logic2Agent\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:20:46311)
+    at nI (C:\Users\punya\Desktop\Logic2Agent\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:20:47780)
+    at nL (C:\Users\punya\Desktop\Logic2Agent\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:20:65533)
+    at nN (C:\Users\punya\Desktop\Logic2Agent\node_modules\next\dist\compiled\next-server\app-page.runtime.prod.js:20:63164)
+Export encountered an error on /_not-found/page: /_not-found, exiting the build.
+ Γ¿» Static worker exited with code: 1 and signal: null

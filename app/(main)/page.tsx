@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { SignedIn, SignedOut } from '@clerk/nextjs';
 
 
@@ -34,20 +35,18 @@ export default function Home() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
             <SignedOut>
-              <Link
-                href="/sign-up"
-                className="w-full sm:w-auto px-10 py-5 bg-white text-black rounded-2xl text-lg font-bold hover:bg-white/90 transition-all active:scale-95 shadow-[0_20px_50px_rgba(255,255,255,0.1)]"
-              >
-                Get Started Free
-              </Link>
+              <ShimmerButton asChild className="w-full sm:w-auto px-10 py-5 rounded-2xl text-lg font-bold shadow-[0_20px_50px_rgba(255,255,255,0.1)]">
+                <Link href="/sign-up">
+                  Get Started Free
+                </Link>
+              </ShimmerButton>
             </SignedOut>
             <SignedIn>
-              <Link
-                href="/dashboard"
-                className="w-full sm:w-auto px-10 py-5 bg-primary hover:bg-primary/90 text-white rounded-2xl text-lg font-bold transition-all shadow-[0_20px_50px_rgba(6,182,212,0.3)] hover:shadow-primary/50 active:scale-95 text-center"
-              >
-                Go to Dashboard
-              </Link>
+              <ShimmerButton asChild className="w-full sm:w-auto px-10 py-5 rounded-2xl text-lg font-bold shadow-[0_20px_50px_rgba(6,182,212,0.3)] hover:shadow-primary/50 text-center">
+                <Link href="/dashboard">
+                  Go to Dashboard
+                </Link>
+              </ShimmerButton>
             </SignedIn>
           </div>
 

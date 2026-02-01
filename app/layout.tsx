@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Waves } from "@/components/ui/wave-background";
 
 
 const geistSans = Geist({
@@ -43,16 +44,25 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white selection:bg-blue-500/30 min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white selection:bg-blue-500/30 min-h-screen flex flex-col relative overflow-x-hidden`}
       >
-        <ClerkProvider>
-          <ConvexClientProvider>
-            <Provider>
-              {children}
-              <Toaster richColors />
-            </Provider>
-          </ConvexClientProvider>
-        </ClerkProvider>
+        <Waves
+          className="fixed inset-0 z-0 pointer-events-none"
+          backgroundColor="#000000"
+          strokeColor="rgba(255,255,255,0.08)"
+          pointerSize={0}
+        />
+        <div className="grainy-overlay" />
+        <div className="relative z-10 flex flex-col min-h-screen">
+          <ClerkProvider>
+            <ConvexClientProvider>
+              <Provider>
+                {children}
+                <Toaster richColors />
+              </Provider>
+            </ConvexClientProvider>
+          </ClerkProvider>
+        </div>
       </body>
     </html>
 

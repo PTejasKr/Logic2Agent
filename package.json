@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:backend": "npx convex dev",
     "build": "next build",
     "start": "next start"
   },
@@ -29,6 +30,7 @@
     "openai": "^6.17.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "simplex-noise": "^4.0.3",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
     "uuid": "^13.0.0",
@@ -45,6 +47,6 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": ">=18.18"
+    "node": "20.x"
   }
 }
