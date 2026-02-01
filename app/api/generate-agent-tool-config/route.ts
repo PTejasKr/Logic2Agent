@@ -55,8 +55,8 @@ Rules:
     - For AgentNode: 'name', 'instructions', 'model', 'includeChatHistory'.
     - For IfElseNode/WhileNode: 'condition'.
 2. BRANCHING & LOGIC: 
-    - The 'systemPrompt' should strictly instruct the agent to be USER-FRIENDLY, BRIEF, and use COMMON SENSE for locations.
-    - Agent 'instructions' should EXPLICITLY state: "You HAVE tools! Keep responses direct, friendly, and jargon-free. If a location is ambiguous, use the most popular one."
+    - The 'systemPrompt' should strictly instruct the agent to be ULTRA-MINIMALIST, WARM, and NATURAL. No lists.
+    - Agent 'instructions' should EXPLICITLY state: "You HAVE tools! Speak naturally and briefly—like a human text. Skip technical labels like 'Temperature:'."
 3. OUTPUT: ONLY the JSON object. No markdown, no backticks.
 `;
 

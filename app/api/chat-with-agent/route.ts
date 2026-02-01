@@ -2,6 +2,13 @@ import { NextResponse } from "next/server";
 import { groq } from "@/config/GroqModel";
 import { openai } from "@/config/OpenAiModel";
 
+// 🧹 Fail-safe: Strip all reasoning tags from AI output
+function cleanResponse(text: string): string {
+    if (!text) return "Done.";
+    // Remove anything between <think> and </think> (including the tags)
+    return text.replace(/<think>[\s\S]*?<\/think>/gi, "").trim();
+}
+
 export async function POST(req: Request) {
     try {
         const { messages, toolConfig } = await req.json();
@@ -77,19 +84,18 @@ async function handleGroqChat(messages: any[], toolConfig: any) {
 
     const masterSystemPrompt = `
     ### CORE IDENTITY & MISSION:
-    You are an autonomous AI agent part of this workflow: ${toolConfig.systemPrompt}
+    You are a warm, helpful AI assistant.
+    Workflow Context: ${toolConfig.systemPrompt}
     Your name: ${toolConfig.primaryAgentName}
     
-    ### AVAILABLE TOOLS:
-    You have access to ${groqTools.length} real-time tools. 
-    TOOLS LIST: ${groqTools.map((t: any) => t.function.name).join(", ")}
-    
     ### MANDATORY RULES:
-    1. **USER-FRIENDLY**: Use simple words. No jargon (pressure, visibility, etc.). Use friendly emojis.
-    2. **NO REASONING LEAKS**: NEVER include <think> or any internal reasoning tags in the final response.
-    3. **COMMON SENSE**: For ambiguous locations like "Delhi", always use the most famous one (Delhi, India).
-    4. **BREVITY**: Be extremely concise. 3-4 bullet points max. No filler.
-    5. **FALLBACK**: If a tool fails, state the error briefly.
+    1. **ULTRA-MINIMALIST**: Do NOT use lists or technical labels like "Temperature:". Speak like a human. 
+       - Bad: "- Temp: 20C - Condition: Mist"
+       - Good: "It's a misty 20°C in Bhopal right now! 🌤️"
+    2. **ZERO TECHNICAL JARGON**: No pressure, visibility, or wind speed unless explicitly asked.
+    3. **NO REASONING LEAKS**: NEVER include <think>, empty tags, or internal monologues.
+    4. **COMMON SENSE**: Assume the most famous location (e.g., Delhi, India) for ambiguous names.
+    5. **ONE SENTENCE**: Keep most answers to a single, high-impact sentence.
     
     ### WORKFLOW CONTEXT:
     ${JSON.stringify(toolConfig.agents, null, 2)}
@@ -152,10 +158,10 @@ async function handleGroqChat(messages: any[], toolConfig: any) {
             model: "qwen/qwen3-32b",
             messages: chatMessages,
         });
-        return NextResponse.json({ reply: finalResponse.choices[0].message.content || "Done." });
+        return NextResponse.json({ reply: cleanResponse(finalResponse.choices[0].message.content || "") });
     }
 
-    return NextResponse.json({ reply: initialMessage.content || "Done." });
+    return NextResponse.json({ reply: cleanResponse(initialMessage.content || "") });
 }
 
 // --- OpenAI Handler ---
@@ -192,19 +198,18 @@ async function handleOpenAiChat(messages: any[], toolConfig: any) {
 
     const masterSystemPrompt = `
     ### CORE IDENTITY & MISSION:
-    You are an autonomous AI agent part of this workflow: ${toolConfig.systemPrompt}
+    You are a warm, helpful AI assistant.
+    Workflow Context: ${toolConfig.systemPrompt}
     Your name: ${toolConfig.primaryAgentName}
     
-    ### AVAILABLE TOOLS:
-    You have access to ${openAiTools.length} real-time tools. 
-    TOOLS LIST: ${openAiTools.map((t: any) => t.function.name).join(", ")}
-    
     ### MANDATORY RULES:
-    1. **USER-FRIENDLY**: Use simple words. No jargon (pressure, visibility, etc.). Use friendly emojis.
-    2. **NO REASONING LEAKS**: NEVER include <think> or any internal reasoning tags in the final response.
-    3. **COMMON SENSE**: For ambiguous locations like "Delhi", always use the most famous one (Delhi, India).
-    4. **BREVITY**: Be extremely concise. 3-4 bullet points max. No filler.
-    5. **FALLBACK**: If a tool fails, state the error briefly.
+    1. **ULTRA-MINIMALIST**: Do NOT use lists or technical labels like "Temperature:". Speak like a human. 
+       - Bad: "- Temp: 20C - Condition: Mist"
+       - Good: "It's a misty 20°C in Bhopal right now! 🌤️"
+    2. **ZERO TECHNICAL JARGON**: No pressure, visibility, or wind speed unless explicitly asked.
+    3. **NO REASONING LEAKS**: NEVER include <think>, empty tags, or internal monologues.
+    4. **COMMON SENSE**: Assume the most famous location (e.g., Delhi, India) for ambiguous names.
+    5. **ONE SENTENCE**: Keep most answers to a single, high-impact sentence.
     
     ### WORKFLOW CONTEXT:
     ${JSON.stringify(toolConfig.agents, null, 2)}
@@ -267,8 +272,8 @@ async function handleOpenAiChat(messages: any[], toolConfig: any) {
             model: "gpt-4o-mini",
             messages: chatMessages as any,
         });
-        return NextResponse.json({ reply: finalResponse.choices[0].message.content || "Done." });
+        return NextResponse.json({ reply: cleanResponse(finalResponse.choices[0].message.content || "") });
     }
 
-    return NextResponse.json({ reply: initialMessage.content || "Done." });
+    return NextResponse.json({ reply: cleanResponse(initialMessage.content || "") });
 }
