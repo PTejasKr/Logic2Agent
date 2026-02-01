@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import React from 'react'
 import { useMutation, useQuery } from 'convex/react';
+import { toast } from 'sonner';
 
 interface ChatMessage {
     role: 'user' | 'agent' | 'system';
@@ -93,6 +94,14 @@ function PreviewAgent() {
             });
 
             const text = await result.text();
+
+            if (!result.ok) {
+                const errData = text ? JSON.parse(text) : { error: 'Unknown Error' };
+                toast.error(`Reboot Failed: ${errData.error || result.statusText}`);
+                setIsRebooting(false);
+                return null;
+            }
+
             if (!text) {
                 console.error(`API Error (${result.status}): Empty response body`);
                 return null;
@@ -101,6 +110,11 @@ function PreviewAgent() {
             try {
                 const data = JSON.parse(text);
                 console.log("🤖 AI Tool Config:", data);
+
+                if (data._fallback) {
+                    toast.info("Groq limit reached. Using OpenAI safety net for configuration.");
+                }
+
                 setToolConfig(data);
 
                 // 💾 Save to DB if manually triggered
@@ -155,6 +169,10 @@ function PreviewAgent() {
             });
 
             const data = await response.json();
+
+            if (data._fallback) {
+                toast.info("Groq limit reached. Switched to OpenAI for this response.");
+            }
 
             if (data.reply) {
                 setMessages(prev => [...prev, {
